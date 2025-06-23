@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katlego | Tech Babe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #fceef1;
+      --accent: #ffd6e0;
+      --text: #333;
+      --highlight: #f7a1c4;
+      --white: #fff;
+    }
+
+    body.dark {
+      --bg: #1a1a2e;
+      --accent: #16213e;
+      --text: #eaeaea;
+      --highlight: #e94560;
+      --white: #222;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      position: relative;
+    }
+
+    canvas#bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    header {
+      background: var(--accent);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    header h1 {
+      color: var(--highlight);
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--highlight);
+    }
+
+    .theme-toggle {
+      background: var(--highlight);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      position: relative;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .hero h2 span {
+      color: var(--highlight);
+    }
+
+    .about-container, .skills, .projects, .fun-facts, .extras-box, .contact-form {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .skill-group, .fun-facts, .extras-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .skill, .fact, .extra {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px;
+      background: var(--accent);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .toggle-btn {
+      background: var(--highlight);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .contact-form button {
+      background: var(--highlight);
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .socials i {
+      font-size: 24px;
+      margin: 10px;
+      color: var(--highlight);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: var(--accent);
+    }
+  </style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<header>
+  <h1>Katlego</h1>
+  <div>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+  </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#extra">Extras</a>
+    <a href="#sepedi">Sepedi</a>
+    <a href="#voluntary">Voluntary</a>
+    <a href="#contact">Contact</a> 
+  </nav>
+</header>
+
+<section class="hero" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; background:linear-gradient(120deg, var(--accent) 0%, var(--bg) 100%); border-radius:0 0 32px 32px; box-shadow:0 4px 24px rgba(247,161,196,0.08); position:relative;">
+    <div style="margin-bottom:18px;">
+        <img src="../Katlego Rapanyane👩‍🎓/Pictures/Kat.jpeg" alt="Katlego" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:4px solid var(--highlight); box-shadow:0 4px 18px rgba(247,161,196,0.18), 0 1.5px 8px rgba(0,0,0,0.07); background:#fff; transition:transform 0.3s;" id="heroImg">
+    </div>
+    <h2 style="font-size:2.3em; color:var(--highlight); font-weight:700; margin-bottom:10px; text-align:center;">
+        I’m Katlego, <span id="type" style="color:var(--text); font-weight:700;"></span>
+        <span class="emoji-bounce" style="font-size:1.1em; margin-left:4px;">🌸</span>
+    </h2>
+    <p style="font-size:1.18em; color:var(--text); margin-bottom:16px; text-align:center; max-width:420px;">
+        A techie with <span style="color:var(--highlight); font-weight:600;">pink power</span> vibes<br>
+        <span style="color:var(--highlight);">Future Data Analyst</span> | Always glowing &amp; growing
+    </p>
+    <div style="display:flex; gap:14px; margin-bottom:10px; flex-wrap:wrap; justify-content:center;">
+        <button class="toggle-btn" style="background:var(--highlight); color:#fff; font-weight:600; font-size:1em;" onclick="showHeroFact()">✨ Fun Fact</button>
+        <button class="toggle-btn" style="background:var(--accent); color:var(--highlight); font-weight:600; font-size:1em;" onclick="scrollToAbout()">🌱 About Me</button>
+    </div>
+    <div id="heroFact" style="margin-top:10px; color:var(--highlight); font-size:1.08em; font-style:italic; min-height:22px;"></div>
+    <div style="position:absolute; bottom:18px; left:50%; transform:translateX(-50%);">
+        <span class="emoji-bounce" style="font-size:2em;">👇🏾</span>
+    </div>
+    <style>
+        .hero {
+            padding: 90px 18px 40px 18px;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+        #heroImg:hover {
+            transform: scale(1.07) rotate(-3deg);
+            box-shadow: 0 8px 32px rgba(247,161,196,0.22), 0 2px 12px rgba(0,0,0,0.10);
+        }
+        @media (max-width: 700px) {
+            .hero {
+                padding: 60px 6px 24px 6px !important;
+                min-height: 45vh !important;
+            }
+            .hero h2 {
+                font-size: 1.4em !important;
+            }
+            .hero p {
+                font-size: 1em !important;
+            }
+            #heroImg {
+                width: 80px !important;
+                height: 80px !important;
+            }
+        }
+    </style>
+    <script>
+        // Typing effect (already in main script, but for fallback)
+        if (!window.heroTypeStarted) {
+            window.heroTypeStarted = true;
+            const phrases = ["Techie", "Creator", "Glow Queen", "Data Analyst"];
+            let i = 0, j = 0, isDeleting = false, current = [], display = document.getElementById("type");
+            function loop() {
+                display.innerHTML = current.join("");
+                if (!isDeleting && j <= phrases[i].length) current.push(phrases[i][j++]);
+                else if (isDeleting && j > 0) current.pop(), j--;
+                if (j === phrases[i].length) isDeleting = true;
+                if (j === 0 && isDeleting) isDeleting = false, i = (i+1)%phrases.length;
+                setTimeout(loop, isDeleting ? 60 : 120);
+            }
+            loop();
+        }
+        // Fun facts for hero
+        const heroFacts = [
+            "🎶 Coding + Drake = My jam session.",
+            "🚗 I can name car models just by their headlights!",
+            "🧁 I bake cupcakes for my coding study group.",
+            "🌱 I love teaching tech using Sepedi metaphors.",
+            "💖 My favorite color is pink (obviously!).",
+            "🎨 Canva is my second home.",
+            "📱 I create tech TikToks & tutorials!"
+        ];
+        function showHeroFact() {
+            const idx = Math.floor(Math.random() * heroFacts.length);
+            document.getElementById('heroFact').innerText = heroFacts[idx];
+            // Emoji confetti
+            const emojis = ['🌸','✨','💖','🎉','🧁','🚀','🎨','🎶'];
+            for (let i = 0; i < 10; i++) {
+                const span = document.createElement('span');
+                span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+                span.style.position = 'fixed';
+                span.style.left = (window.innerWidth/2 + (Math.random()-0.5)*120) + 'px';
+                span.style.top = (window.innerHeight/6 + Math.random()*60) + 'px';
+                span.style.fontSize = (Math.random()*14+18) + 'px';
+                span.style.opacity = 0.85;
+                span.style.transition = 'top 1.1s cubic-bezier(.4,2,.6,1), opacity 1.1s';
+                document.body.appendChild(span);
+                setTimeout(() => {
+                    span.style.top = (window.innerHeight/6+100+Math.random()*40) + 'px';
+                    span.style.opacity = 0;
+                }, 30);
+                setTimeout(() => { span.remove(); }, 1200);
+            }
+        }
+        // Scroll to About section
+        function scrollToAbout() {
+            document.getElementById('about').scrollIntoView({behavior:'smooth'});
+        }
+    </script>
+</section>
+
+<section id="about" data-aos="fade-up">
+    <h2 style="text-align:center; color:var(--highlight); font-size:2.2em; margin-bottom:18px;">
+        🌸 About Me
+    </h2>
+    <div class="about-container" style="display:flex; flex-wrap:wrap; align-items:center; gap:28px;">
+        <div style="flex:0 0 160px; display:flex; justify-content:center; align-items:center;">
+            <img 
+                src="../Katlego Rapanyane👩‍🎓/Pictures/Kat.jpeg" 
+                alt="Katlego" 
+                style="
+                    width: 160px;
+                    height: 160px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    box-shadow: 0 4px 18px rgba(247, 161, 196, 0.18), 0 1.5px 8px rgba(0,0,0,0.07);
+                    border: 4px solid var(--highlight);
+                    transition: transform 0.3s, box-shadow 0.3s;
+                    background: #fff;
+                "
+                id="aboutImg"
+            >
+        </div>
+        <div style="flex:1; min-width:220px;">
+            <p style="font-size:1.13em; margin-bottom:10px;">
+                <span style="font-size:1.3em;">👋🏾 Dumelang!</span> I’m <strong>Katlego Rapanyane</strong>, a proudly Pedi woman from the vibrant kasi streets of South Africa, walking boldly in both my culture and my calling in tech.
+            </p>
+            <div id="aboutFunFact" style="background:var(--accent); color:var(--text); border-radius:8px; padding:10px 16px; margin-bottom:12px; font-size:1em; font-style:italic; display:inline-block;">
+                💡 <span id="funFactText">Click the button for a fun fact about me!</span>
+            </div>
+            <button class="toggle-btn" style="margin-left:8px; margin-bottom:14px; background:var(--highlight); color:#fff; font-weight:600; font-size:1em;" onclick="showAboutFunFact()">✨ Fun Fact</button>
+            <p>
+                I'm a <span style="color:var(--highlight); font-weight:600;">final-year IT student</span> and research assistant, passionate about digital transformation, data analysis, and empowering others — especially young women — to claim their space in the tech world.
+            </p>
+            <p>
+                Raised in <strong>Dev-rede (Ga-Mabelele) </strong>, I learned the value of <span style="color:var(--highlight);">community</span>, <span style="color:var(--highlight);">resilience</span>, and <span style="color:var(--highlight);">creativity</span> from an early age. These lessons shape how I approach coding and problem-solving today.
+            </p>
+            <p>
+                As a <span style="color:var(--highlight); font-weight:600;">future data analyst</span>, I use tech to make a difference. I believe in the power of data to tell stories, drive decisions, and create opportunities — especially for young women and people from underrepresented backgrounds.
+            </p>
+            <p>
+                <span style="font-weight:600;">Tech isn't just about code</span> — it’s about <span style="color:var(--highlight);">community</span>, <span style="color:var(--highlight);">culture</span>, and <span style="color:var(--highlight);">creating change</span>. Being Pedi is more than my heritage; it’s the rhythm in how I work, the values I live by, and the perspective I bring to every project.
+            </p>
+            <div style="margin:14px 0;">
+                <span style="background:var(--highlight); color:#fff; border-radius:6px; padding:4px 10px; font-size:0.98em;">
+                    Botho • Hlompho • Maatla
+                </span>
+                <span style="margin-left:8px; color:var(--text); font-size:0.98em;">
+                    (Humanity • Respect • Strength)
+                </span>
+            </div>
+            <p>
+                This website is not just a portfolio — it’s a <span style="color:var(--highlight); font-weight:600;">movement</span>. Where tech meets heart, kasi energy meets global impact, and tradition powers growth. Through this platform, I share my journey, skills, and insights to uplift others from backgrounds like mine.
+            </p>
+            <p style="margin-top:10px;">
+                Whether you're here to collaborate, learn, get inspired, or just vibe — <span style="color:var(--highlight); font-weight:600;">o amogetswe</span> (you are welcome). Let’s glow up, code strong, and rise together! 💻🌸✊🏾
+            </p>
+            <div style="margin-top:18px;">
+                <button class="toggle-btn" style="background:var(--accent); color:var(--highlight); font-weight:600; font-size:1em;" onclick="toggleAboutExtra()">🌟 My Motto</button>
+                <span id="aboutExtra" style="display:none; margin-left:12px; color:var(--highlight); font-style:italic; font-size:1.08em;">
+                    "Glow up, code strong, and rise together!"
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Fun facts for About Me section
+    const aboutFunFacts = [
+        "🚗 I can name car models just by their headlights!",
+        "🎶 Coding + Drake = My jam session.",
+        "🌱 I love teaching tech using Sepedi metaphors.",
+        "💖 My favorite color is pink (obviously!).",
+        "📚 I collect motivational quotes in Sepedi.",
+        "🧁 I bake cupcakes for my coding study group.",
+        "🎨 Canva is my second home.",
+        "📱 I create tech TikToks & tutorials!"
+    ];
+    function showAboutFunFact() {
+        const idx = Math.floor(Math.random() * aboutFunFacts.length);
+        document.getElementById('funFactText').innerText = aboutFunFacts[idx];
+    }
+    function toggleAboutExtra() {
+        const el = document.getElementById('aboutExtra');
+        el.style.display = el.style.display === 'inline' ? 'none' : 'inline';
+    }
+</script>
+
+<style>
+    @media (max-width: 700px) {
+        .about-container {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 18px !important;
+        }
+        .about-container img {
+            margin: 0 auto 12px auto !important;
+            display: block !important;
+        }
+    }
+</style></div>
+
+<section id="experience" data-aos="fade-up" class="experience-section" style="margin-top:40px;">
+    <h2 style="text-align:center; color:var(--highlight); font-size:2em; margin-bottom:18px;">
+        💼 My Experience
+    </h2>
+    <div class="experience-timeline" style="display:flex; flex-direction:column; gap:28px; max-width:800px; margin:auto;">
+        <!-- Job 1 -->
+        <div class="exp-card" data-current="false">
+            <div class="exp-header" style="display:flex; align-items:center; gap:14px;">
+                <span class="exp-dot" style="background:#ffd6e0;"></span>
+                <div>
+                    <h3 style="margin:0; color:var(--highlight); font-size:1.18em;">IT Intern – Digital Transformation</h3>
+                    <span style="color:var(--text); font-size:0.98em;">Sunrise Tech Solutions</span>
+                </div>
+                <span class="exp-date" style="margin-left:auto; color:var(--highlight); font-size:0.98em;">Dec 2022 – Jun 2023</span>
+            </div>
+            <div class="exp-details" style="margin-top:8px; color:var(--text); font-size:1.05em;">
+                <ul style="margin-left:18px;">
+                    <li>Automated HR onboarding with Python scripts ✨</li>
+                    <li>Created digital forms & dashboards for staff</li>
+                    <li>Organized “Tech for Girls” workshops</li>
+                </ul>
+                <button class="toggle-btn exp-more-btn" onclick="toggleExpDetails(this)">More</button>
+                <div class="exp-extra" style="display:none; margin-top:8px; color:var(--highlight); font-size:0.98em;">
+                    <strong>Fun Fact:</strong> I taught my team to use Canva for project reports!
+                </div>
+            </div>
+        </div>
+        <!-- Job 2 -->
+        <div class="exp-card" data-current="false">
+            <div class="exp-header" style="display:flex; align-items:center; gap:14px;">
+                <span class="exp-dot" style="background:#f7a1c4;"></span>
+                <div>
+                    <h3 style="margin:0; color:var(--highlight); font-size:1.18em;">Research Assistant – Data Analytics</h3>
+                    <span style="color:var(--text); font-size:0.98em;">University of Pretoria</span>
+                </div>
+                <span class="exp-date" style="margin-left:auto; color:var(--highlight); font-size:0.98em;">Jul 2023 – Feb 2024</span>
+            </div>
+            <div class="exp-details" style="margin-top:8px; color:var(--text); font-size:1.05em;">
+                <ul style="margin-left:18px;">
+                    <li>Analyzed student data for success trends 📊</li>
+                    <li>Built SQL queries & Power BI dashboards</li>
+                    <li>Presented findings at student conferences</li>
+                </ul>
+                <button class="toggle-btn exp-more-btn" onclick="toggleExpDetails(this)">More</button>
+                <div class="exp-extra" style="display:none; margin-top:8px; color:var(--highlight); font-size:0.98em;">
+                    <strong>Fun Fact:</strong> My dashboard was featured in the campus newsletter!
+                </div>
+            </div>
+        </div>
+        <!-- Job 3 (Current) -->
+        <div class="exp-card current-job" data-current="true" style="border:2px solid var(--highlight); box-shadow:0 2px 12px rgba(247,161,196,0.10);">
+            <div class="exp-header" style="display:flex; align-items:center; gap:14px;">
+                <span class="exp-dot" style="background:var(--highlight); animation:glow 1.2s infinite alternate;"></span>
+                <div>
+                    <h3 style="margin:0; color:var(--highlight); font-size:1.18em;">Junior Data Analyst <span style="font-size:1.1em;">(Current)</span></h3>
+                    <span style="color:var(--text); font-size:0.98em;">GlowUp Analytics</span>
+                </div>
+                <span class="exp-date" style="margin-left:auto; color:var(--highlight); font-size:0.98em;">Mar 2024 – Present</span>
+            </div>
+            <div class="exp-details" style="margin-top:8px; color:var(--text); font-size:1.05em;">
+                <ul style="margin-left:18px;">
+                    <li>Transforming raw data into glowing insights 💖</li>
+                    <li>Building interactive dashboards for clients</li>
+                    <li>Mentoring girls in tech through workshops</li>
+                </ul>
+                <button class="toggle-btn exp-more-btn" onclick="toggleExpDetails(this)">More</button>
+                <div class="exp-extra" style="display:none; margin-top:8px; color:var(--highlight); font-size:0.98em;">
+                    <strong>Fun Fact:</strong> I use pink-themed charts to make data fun!
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .experience-timeline {
+            position: relative;
+            padding-left: 0;
+        }
+        .exp-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(247,161,196,0.08);
+            padding: 22px 18px;
+            position: relative;
+            transition: box-shadow 0.2s, transform 0.2s, border 0.2s;
+            border-left: 6px solid var(--accent);
+        }
+        .exp-card.current-job {
+            border-left: 6px solid var(--highlight);
+            border: 2px solid var(--highlight);
+            box-shadow: 0 4px 18px rgba(247,161,196,0.14);
+            animation: popIn 0.7s;
+        }
+        .exp-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(247,161,196,0.13);
+            border: 2px solid #fff;
+            margin-right: 2px;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 0 0 var(--highlight);}
+            100% { box-shadow: 0 0 12px 4px var(--highlight);}
+        }
+        .exp-header h3 {
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .exp-details ul {
+            padding-left: 18px;
+            margin-bottom: 8px;
+        }
+        .exp-more-btn {
+            background: var(--accent);
+            color: var(--highlight);
+            font-size: 0.98em;
+            margin-top: 4px;
+            padding: 6px 14px;
+        }
+        .exp-more-btn:hover {
+            background: var(--highlight);
+            color: #fff;
+        }
+        .exp-extra {
+            animation: fadeIn 0.4s;
+        }
+        @media (max-width: 700px) {
+            .experience-timeline {
+                gap: 16px !important;
+            }
+            .exp-card {
+                padding: 14px 6px !important;
+            }
+            .exp-header h3 {
+                font-size: 1em !important;
+            }
+            .exp-date {
+                font-size: 0.93em !important;
+            }
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.92);}
+            to { opacity: 1; transform: scale(1);}
+        }
+        @keyframes fadeIn {
+            from { opacity: 0;}
+            to { opacity: 1;}
+        }
+    </style>
+    <script>
+        // Toggle experience details
+        function toggleExpDetails(btn) {
+            const extra = btn.nextElementSibling;
+            if (extra.style.display === "block") {
+                extra.style.display = "none";
+                btn.textContent = "More";
+            } else {
+                extra.style.display = "block";
+                btn.textContent = "Less";
+                // Emoji confetti
+                const emojis = ['🌸','✨','💖','🎉','🧁','🚀','🎨','🎶'];
+                for (let i = 0; i < 8; i++) {
+                    const span = document.createElement('span');
+                    span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+                    span.style.position = 'fixed';
+                    span.style.left = (window.innerWidth/2 + (Math.random()-0.5)*100) + 'px';
+                    span.style.top = (window.scrollY + btn.getBoundingClientRect().top - 30) + 'px';
+                    span.style.fontSize = (Math.random()*10+18) + 'px';
+                    span.style.opacity = 0.85;
+                    span.style.transition = 'top 1.1s cubic-bezier(.4,2,.6,1), opacity 1.1s';
+                    document.body.appendChild(span);
+                    setTimeout(() => {
+                        span.style.top = (window.scrollY + btn.getBoundingClientRect().top - 90 - Math.random()*40) + 'px';
+                        span.style.opacity = 0;
+                    }, 30);
+                    setTimeout(() => { span.remove(); }, 1200);
+                }
+            }
+        }
+    </script>
+</section>
+
+<section id="skills" data-aos="fade-up" class="skills">
+    <h2 style="text-align:center; color:var(--highlight); font-size:2em; margin-bottom:18px;">
+        💡 My Skills
+    </h2>
+    <div style="display:flex; flex-wrap:wrap; gap:24px; justify-content:center;">
+        <!-- Programming Skills Card -->
+        <div class="skill-card" style="background:var(--white); border-radius:12px; box-shadow:0 2px 10px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:320px;">
+            <h3 style="color:var(--highlight); text-align:center; margin-bottom:10px;">👩🏾‍💻 Programming</h3>
+            <div class="skill-group" style="justify-content:center;">
+                <div class="skill" data-tooltip="HTML5 & CSS3 for beautiful web pages!">HTML &amp; CSS</div>
+                <div class="skill" data-tooltip="Dynamic, interactive web magic!">JavaScript</div>
+                <div class="skill" data-tooltip="Data, automation, and analysis!">Python</div>
+                <div class="skill" data-tooltip="Databases & queries pro!">SQL</div>
+            </div>
+            <div class="skill-progress" style="margin-top:16px;">
+                <div style="margin-bottom:6px;">HTML &amp; CSS</div>
+                <div class="progress-bar"><div class="progress" style="width:92%; background:var(--highlight);"></div></div>
+                <div style="margin-bottom:6px; margin-top:8px;">JavaScript</div>
+                <div class="progress-bar"><div class="progress" style="width:80%; background:var(--highlight);"></div></div>
+                <div style="margin-bottom:6px; margin-top:8px;">Python</div>
+                <div class="progress-bar"><div class="progress" style="width:85%; background:var(--highlight);"></div></div>
+                <div style="margin-bottom:6px; margin-top:8px;">SQL</div>
+                <div class="progress-bar"><div class="progress" style="width:70%; background:var(--highlight);"></div></div>
+            </div>
+        </div>
+        <!-- Soft Skills Card -->
+        <div class="skill-card" style="background:var(--white); border-radius:12px; box-shadow:0 2px 10px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:320px;">
+            <h3 style="color:var(--highlight); text-align:center; margin-bottom:10px;">🌸 Soft Skills</h3>
+            <div class="skill-group" style="justify-content:center;">
+                <div class="skill" data-tooltip="I love sharing ideas & listening!">Communication</div>
+                <div class="skill" data-tooltip="Turning challenges into solutions!">Problem Solving</div>
+                <div class="skill" data-tooltip="Always thinking outside the box!">Creativity</div>
+                <div class="skill" data-tooltip="Teamwork makes the dream work!">Collaboration</div>
+            </div>
+            <div style="margin-top:16px; text-align:center;">
+                <span style="background:var(--accent); color:var(--highlight); border-radius:6px; padding:4px 10px; font-size:0.98em;">
+                    “Botho ke maatla” (Humanity is strength)
+                </span>
+            </div>
+        </div>
+        <!-- Professional Skills Card -->
+        <div class="skill-card" style="background:var(--white); border-radius:12px; box-shadow:0 2px 10px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:320px;">
+            <h3 style="color:var(--highlight); text-align:center; margin-bottom:10px;">🚀 Professional</h3>
+            <div class="skill-group" style="justify-content:center;">
+                <div class="skill" data-tooltip="Turning data into stories!">Data Analysis</div>
+                <div class="skill" data-tooltip="Version control queen!">Git &amp; GitHub</div>
+                <div class="skill" data-tooltip="Designs that delight!">UI/UX Design</div>
+                <div class="skill" data-tooltip="Confident & clear presenter!">Presentation</div>
+            </div>
+            <div style="margin-top:16px; text-align:center;">
+                <button class="toggle-btn" style="background:var(--highlight); color:#fff; font-size:0.98em;" onclick="showSkillFact()">✨ Fun Skill Fact</button>
+                <span id="skillFact" style="display:inline-block; margin-left:10px; color:var(--highlight); font-style:italic; font-size:1em;"></span>
+            </div>
+        </div>
+    </div>
+    <style>
+        .skill-card .skill-group {
+            gap: 10px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+        }
+        .skill-card .skill {
+            background: var(--accent);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .skill-card .skill:hover {
+            background: var(--highlight);
+            color: #fff;
+            transform: scale(1.07);
+        }
+        .progress-bar {
+            width: 100%;
+            background: var(--accent);
+            border-radius: 6px;
+            height: 8px;
+            margin-bottom: 2px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.7s cubic-bezier(.4,2,.6,1);
+        }
+        /* Tooltip styling */
+        .skill[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 50%;
+            bottom: 120%;
+            transform: translateX(-50%);
+            background: var(--highlight);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            font-size: 0.95em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            z-index: 10;
+            opacity: 1;
+            pointer-events: none;
+        }
+        @media (max-width: 900px) {
+            .skill-card {
+                min-width: 180px !important;
+                max-width: 100% !important;
+            }
+            .skills > div {
+                flex-direction: column !important;
+                gap: 18px !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .skill-card {
+                padding: 16px 8px !important;
+            }
+            .skills > div {
+                flex-direction: column !important;
+                gap: 14px !important;
+            }
+        }
+    </style>
+    <script>
+        // Fun facts for skills
+        const skillFacts = [
+            "🌸 I once debugged a Python script with cupcakes as motivation!",
+            "💡 My first website was themed pink and glittery (still proud).",
+            "🎤 I presented my first data dashboard to 100+ students!",
+            "👩🏾‍💻 I use GitHub for both code and digital vision boards.",
+            "🎨 I design UI mockups on Canva before coding.",
+            "📊 I love making data visualizations that tell a story.",
+            "🤝 I believe every project is better with teamwork.",
+            "🚀 I taught my little cousin to code using emojis!"
+        ];
+        function showSkillFact() {
+            const idx = Math.floor(Math.random() * skillFacts.length);
+            document.getElementById('skillFact').innerText = skillFacts[idx];
+        }
+    </script>
+</section>
+
+<section id="projects" data-aos="fade-up" class="projects" style="margin-bottom:40px;">
+    <h2 style="text-align:center; color:var(--highlight); font-size:2em; margin-bottom:18px;">
+        🚀 My Projects
+    </h2>
+    <div class="projects-grid" style="display:flex; flex-wrap:wrap; gap:24px; justify-content:center;">
+        <!-- Project Card 1 -->
+        <div class="project-card" style="background:var(--white); border-radius:14px; box-shadow:0 2px 12px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:340px; transition:transform 0.2s;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <span style="font-size:1.7em;">💻</span>
+                <h3 style="color:var(--highlight); font-size:1.18em; margin:0;">Tech n’ Chill Blog</h3>
+            </div>
+            <p style="margin-bottom:10px;">Empowering women in tech through blogs, tutorials & digital storytelling.</p>
+            <ul style="margin-bottom:12px; padding-left:18px; font-size:0.98em;">
+                <li>✨ Interactive coding guides</li>
+                <li>🌸 Women-in-tech interviews</li>
+                <li>🎥 Video tutorials & TikToks</li>
+            </ul>
+            <button class="toggle-btn" style="background:var(--highlight); color:#fff; font-size:0.98em;" onclick="toggleProjectDetails(0)">More Info</button>
+            <div class="project-details" style="display:none; margin-top:10px; color:var(--highlight); font-size:0.98em;">
+                <strong>Stack:</strong> HTML, CSS, JavaScript, Canva<br>
+                <strong>Impact:</strong> 200+ young women inspired!
+            </div>
+            <div style="margin-top:10px;">
+                <a href="#" style="color:var(--highlight); text-decoration:underline; font-size:0.98em;">Visit Blog</a>
+            </div>
+        </div>
+        <!-- Project Card 2 -->
+        <div class="project-card" style="background:var(--white); border-radius:14px; box-shadow:0 2px 12px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:340px; transition:transform 0.2s;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <span style="font-size:1.7em;">🧠</span>
+                <h3 style="color:var(--highlight); font-size:1.18em; margin:0;">Cybersecurity Research</h3>
+            </div>
+            <p style="margin-bottom:10px;">Protecting patient data using smart tech analysis & research.</p>
+            <ul style="margin-bottom:12px; padding-left:18px; font-size:0.98em;">
+                <li>🔐 Data privacy dashboards</li>
+                <li>📊 Risk analysis reports</li>
+                <li>🤝 Collaboration with health teams</li>
+            </ul>
+            <button class="toggle-btn" style="background:var(--highlight); color:#fff; font-size:0.98em;" onclick="toggleProjectDetails(1)">More Info</button>
+            <div class="project-details" style="display:none; margin-top:10px; color:var(--highlight); font-size:0.98em;">
+                <strong>Stack:</strong> Python, SQL, Power BI<br>
+                <strong>Impact:</strong> Improved data safety for 1000+ patients!
+            </div>
+            <div style="margin-top:10px;">
+                <a href="#" style="color:var(--highlight); text-decoration:underline; font-size:0.98em;">Read Research</a>
+            </div>
+        </div>
+        <!-- Add more project cards below as needed -->
+        <div class="project-card" style="background:var(--white); border-radius:14px; box-shadow:0 2px 12px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:340px; transition:transform 0.2s;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <span style="font-size:1.7em;">🎨</span>
+                <h3 style="color:var(--highlight); font-size:1.18em; margin:0;">UI/UX Canva Kits</h3>
+            </div>
+            <p style="margin-bottom:10px;">Designing beautiful, accessible UI kits for student projects.</p>
+            <ul style="margin-bottom:12px; padding-left:18px; font-size:0.98em;">
+                <li>🖌️ Custom color palettes</li>
+                <li>📱 Mobile-first layouts</li>
+                <li>🌈 Inclusive design focus</li>
+            </ul>
+            <button class="toggle-btn" style="background:var(--highlight); color:#fff; font-size:0.98em;" onclick="toggleProjectDetails(2)">More Info</button>
+            <div class="project-details" style="display:none; margin-top:10px; color:var(--highlight); font-size:0.98em;">
+                <strong>Stack:</strong> Canva, Figma, HTML/CSS<br>
+                <strong>Impact:</strong> Used by 10+ student teams!
+            </div>
+            <div style="margin-top:10px;">
+                <a href="#" style="color:var(--highlight); text-decoration:underline; font-size:0.98em;">See Designs</a>
+            </div>
+        </div>
+    </div>
+    <style>
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .project-card:hover {
+            box-shadow: 0 6px 24px rgba(247,161,196,0.18), 0 2px 8px rgba(0,0,0,0.08);
+            transform: translateY(-6px) scale(1.03);
+        }
+        .project-details {
+            animation: fadeIn 0.4s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @media (max-width: 900px) {
+            .projects-grid {
+                flex-direction: column !important;
+                gap: 18px !important;
+            }
+            .project-card {
+                max-width: 100% !important;
+                min-width: 180px !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .project-card {
+                padding: 14px 6px !important;
+            }
+            .projects-grid {
+                gap: 12px !important;
+            }
+        }
+    </style>
+    <script>
+        // Toggle project details
+        function toggleProjectDetails(idx) {
+            const cards = document.querySelectorAll('.project-card .project-details');
+            cards.forEach((el, i) => {
+                if (i === idx) {
+                    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</section>
+
+<section id="extra" data-aos="fade-up">
+    <h2 style="text-align:center; color:var(--highlight); font-size:2em; margin-bottom:18px;">
+        ✨ Extras & Fun Facts
+    </h2>
+
+    <!-- Fun Facts Carousel -->
+    <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:28px;">
+        <h3 style="color:var(--highlight); margin-bottom:10px;">🌸 Fun Fact Carousel</h3>
+        <div id="funFactCarousel" style="background:var(--white); color:var(--highlight); border-radius:12px; box-shadow:0 2px 10px rgba(247,161,196,0.10); padding:18px 28px; font-size:1.18em; min-width:220px; max-width:400px; text-align:center; margin-bottom:10px; transition:box-shadow 0.2s;">
+            🚘 I love cars – I can name models by their headlights!
+        </div>
+        <div style="display:flex; gap:12px;">
+            <button class="toggle-btn" style="background:var(--accent); color:var(--highlight); font-size:1em;" onclick="prevFunFact()">‹</button>
+            <button class="toggle-btn" style="background:var(--accent); color:var(--highlight); font-size:1em;" onclick="nextFunFact()">›</button>
+        </div>
+        <div id="funFactDots" style="margin-top:8px; display:flex; gap:6px;"></div>
+    </div>
+
+    <!-- Animated Work Extras -->
+    <h3 style="margin-top:10px; color:var(--highlight); text-align:center;">💼 Work Extras</h3>
+    <div style="display:flex; justify-content:center; margin-bottom:12px;">
+        <button class="toggle-btn" onclick="toggleExtras()" style="background:var(--highlight); color:#fff; font-weight:600; font-size:1em;">
+            <span id="extrasBtnIcon">▼</span> Show My Work Extras
+        </button>
+    </div>
+    <div class="extras-box" id="extrasBox" style="display:none; flex-wrap:wrap; justify-content:center; gap:16px; animation:fadeIn 0.5s;">
+        <div class="extra" style="animation:popIn 0.4s;">📂 Research HR Letters</div>
+        <div class="extra" style="animation:popIn 0.5s;">🔐 REDCap form support</div>
+        <div class="extra" style="animation:popIn 0.6s;">📈 IT risk documentation</div>
+        <div class="extra" style="animation:popIn 0.7s;">🧩 BABOK-based strategy</div>
+    </div>
+
+    <!-- Cute Emoji Confetti -->
+    <div id="confetti" style="pointer-events:none; position:fixed; left:0; top:0; width:100vw; height:100vh; z-index:9999;"></div>
+
+    <style>
+        @media (max-width: 600px) {
+            #funFactCarousel {
+                padding: 14px 8px !important;
+                font-size: 1em !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+            }
+            .extras-box {
+                flex-direction: column !important;
+                gap: 10px !important;
+                align-items: stretch !important;
+            }
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8);}
+            to { opacity: 1; transform: scale(1);}
+        }
+        @keyframes fadeIn {
+            from { opacity: 0;}
+            to { opacity: 1;}
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--highlight);
+            opacity: 0.3;
+            transition: opacity 0.2s;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .dot.active {
+            opacity: 1;
+            background: var(--highlight);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+    </style>
+
+    <script>
+        // Fun Facts Carousel
+        const funFacts = [
+            "🚘 I love cars – I can name models by their headlights!",
+            "🎶 Coding + Drake = My jam session.",
+            "🎨 Canva is my second home.",
+            "📱 I create tech TikToks & tutorials!",
+            "🧁 I bake cupcakes for my coding study group.",
+            "💖 My favorite color is pink (obviously!).",
+            "🌱 I love teaching tech using Sepedi metaphors.",
+            "📚 I collect motivational quotes in Sepedi."
+        ];
+        let funFactIdx = 0;
+        const funFactCarousel = document.getElementById('funFactCarousel');
+        const funFactDots = document.getElementById('funFactDots');
+        function updateFunFactCarousel(idx) {
+            funFactCarousel.innerText = funFacts[idx];
+            // Dots
+            funFactDots.innerHTML = '';
+            funFacts.forEach((_, i) => {
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (i === idx ? ' active' : '');
+                dot.onclick = () => { funFactIdx = i; updateFunFactCarousel(i); };
+                funFactDots.appendChild(dot);
+            });
+        }
+        function prevFunFact() {
+            funFactIdx = (funFactIdx - 1 + funFacts.length) % funFacts.length;
+            updateFunFactCarousel(funFactIdx);
+            launchConfetti();
+        }
+        function nextFunFact() {
+            funFactIdx = (funFactIdx + 1) % funFacts.length;
+            updateFunFactCarousel(funFactIdx);
+            launchConfetti();
+        }
+        // Auto-advance every 6s
+        setInterval(() => { nextFunFact(); }, 6000);
+        updateFunFactCarousel(funFactIdx);
+
+        // Work Extras Toggle
+        function toggleExtras() {
+            const box = document.getElementById('extrasBox');
+            const icon = document.getElementById('extrasBtnIcon');
+            if (box.style.display === 'flex') {
+                box.style.display = 'none';
+                icon.textContent = '▼';
+            } else {
+                box.style.display = 'flex';
+                icon.textContent = '▲';
+                launchConfetti();
+            }
+        }
+
+        // Cute Emoji Confetti
+        function launchConfetti() {
+            const confetti = document.getElementById('confetti');
+            confetti.innerHTML = '';
+            const emojis = ['🌸','✨','💖','🎉','🧁','🚀','🎨','🎶'];
+            for (let i = 0; i < 18; i++) {
+                const span = document.createElement('span');
+                span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+                span.style.position = 'absolute';
+                span.style.left = Math.random()*100 + 'vw';
+                span.style.top = '-40px';
+                span.style.fontSize = (Math.random()*18+18) + 'px';
+                span.style.opacity = 0.85;
+                span.style.transition = 'top 1.2s cubic-bezier(.4,2,.6,1), opacity 1.2s';
+                confetti.appendChild(span);
+                setTimeout(() => {
+                    span.style.top = (Math.random()*70+20) + 'vh';
+                    span.style.opacity = 0;
+                }, 30);
+            }
+            setTimeout(() => { confetti.innerHTML = ''; }, 1400);
+        }
+    </script>
+</section>
+<section id="sepedi" data-aos="fade-up" class="sepedi-section" style="margin-top:40px;">
+    <h2 style="text-align:center; font-size:2.2em; color:var(--highlight); margin-bottom:10px;">
+        🌍 Sepedi Roots &amp; Culture
+    </h2>
+    <p style="text-align:center; font-size:1.1em; margin-bottom:10px;">
+        <em>"Motho ke motho ka batho."</em> — A person is a person through others. (Ubuntu philosophy)
+    </p>
+    <p style="text-align:center; font-size:1.1em; margin-bottom:10px;">
+        <em>"O seke wa lebala, diphetoho di tla ka maiteko."</em> — Don’t forget, change comes with effort.
+    </p>
+    <p style="text-align:center; font-weight:600; margin-bottom:25px;">
+        Rooted in Sepedi culture, raised in the kasi, and rising in tech — I build with purpose, identity, and a whole lot of heart. 💖
+    </p>
+
+    <!-- Animated Sepedi color strip -->
+    <div id="sepediColors" style="display: flex; height: 12px; margin: 25px 0 18px 0; border-radius: 6px; overflow: hidden; box-shadow:0 2px 8px rgba(0,0,0,0.07); cursor:pointer;">
+        <div style="flex: 1; background: linear-gradient(90deg, #ff0000, #ff6666); transition:background 0.5s;"></div>
+        <div style="flex: 1; background: linear-gradient(90deg, #0000ff, #66aaff); transition:background 0.5s;"></div>
+        <div style="flex: 1; background: linear-gradient(90deg, #00b96b, #ed49cf); transition:background 0.5s;"></div>
+        <div style="flex: 1; background: linear-gradient(90deg, #ffcc00, #ffe066); transition:background 0.5s;"></div>
+        <div style="flex: 1; background: linear-gradient(90deg, #ffffff, #fceef1); transition:background 0.5s;"></div>
+    </div>
+    <div id="colorLabel" style="text-align:center; font-size:0.98em; color:var(--highlight); margin-bottom:18px; min-height:22px;"></div>
+
+    <div class="sepedi-story-box" style="margin-top: 20px; padding: 24px; background-color: var(--accent); border-radius: 14px; box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+        <h3 style="margin-bottom:10px; color:var(--highlight);">💬 My Story</h3>
+        <div class="sepedi-story-flex" style="display:flex; flex-wrap:wrap; gap:20px; align-items:center;">
+            <img src="../Katlego Rapanyane👩‍🎓/Pictures/8304A4E2-27CD-4398-B86F-9DBDFB73A781.png" alt="Sepedi Attire" style="border-radius:10px; width:120px; height:auto; box-shadow:0 2px 8px rgba(0,0,0,0.08); flex-shrink:0;">
+            <div style="flex:1; min-width:200px;">
+                <p>From <strong>Ga-Matlala</strong> to the digital world, my journey is about storytelling — through code and culture. I grew up with Sepedi proverbs like <em>"Tšhila e tšhweu e tšwa leganong"</em> (Beauty rises from struggle).</p>
+                <p>Today, I write clean code with the same care my grandmother weaved her doeks. Debugging is like untangling oral stories passed down under the stars. 🌌</p>
+                <p>Every tech solution I create beats with the spirit of Ubuntu — it’s not just for me, it’s for us.</p>
+                <p>I believe technology can preserve culture. My blog features a space where I teach girls from my kasi how to code — using Sepedi metaphors and everyday stories.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="sepedi-wisdom-box" style="margin-top: 24px; padding: 18px; background-color: var(--highlight); border-radius: 10px; color: white; box-shadow:0 2px 8px rgba(0,0,0,0.07); text-align:center;">
+        <h3>✨ Ask Me in Sepedi</h3>
+        <p id="sepediResponse" style="margin-bottom:10px;">Ke ema mo ka bothakga le seriti. Press the button below to get a Sepedi-inspired tech quote!</p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+            <button class="toggle-btn" style="background: #fff; color: var(--highlight); font-weight: bold; padding: 8px 16px; border-radius: 5px;" onclick="showSepediQuote()">🎙 Show Wisdom</button>
+            <button class="toggle-btn" style="background: #fff; color: var(--highlight); font-weight: bold; padding: 8px 16px; border-radius: 5px;" onclick="showRandomProverb()">🪶 Random Sepedi Proverb</button>
+        </div>
+        <span id="proverbDisplay" style="display:block; margin-top:12px; font-style:italic;"></span>
+    </div>
+
+    <div class="sepedi-cards" style="margin-top: 28px; display:flex; flex-wrap:wrap; gap:18px; justify-content:center;">
+        <div class="sepedi-card" style="background:var(--white); border-radius:10px; padding:18px 24px; min-width:220px; box-shadow:0 2px 8px rgba(0,0,0,0.06); text-align:center; flex:1 1 220px; max-width:320px;">
+            <h4 style="color:var(--highlight); margin-bottom:8px;">🎉 Sepedi Celebrations</h4>
+            <p>We celebrate <strong>Heritage Day</strong> with traditional dance, music, and vibrant attire.<br>
+                <span class="emoji-bounce" style="color:#ff0000;">💃🏾</span> Try the <span style="color:#ff0000;">mokgibo</span> dance or taste <span style="color:#ffcc00;">morogo wa dinawa</span> (wild spinach)!</p>
+        </div>
+        <div class="sepedi-card" style="background:var(--white); border-radius:10px; padding:18px 24px; min-width:220px; box-shadow:0 2px 8px rgba(0,0,0,0.06); text-align:center; flex:1 1 220px; max-width:320px;">
+            <h4 style="color:var(--highlight); margin-bottom:8px;">🧶 Sepedi Symbols</h4>
+            <p>Our beadwork and patterns tell stories — each color and shape has meaning.<br>
+                <span class="color-dot" style="background:#ff0000;"></span> Red for bravery,
+                <span class="color-dot" style="background:#0000ff;"></span> blue for peace,
+                <span class="color-dot" style="background:#ffcc00;"></span> yellow for wealth,
+                <span class="color-dot" style="background:#00b96b;"></span> green for growth,
+                <span class="color-dot" style="background:#fff; border:1px solid #eee;"></span> white for purity.
+            </p>
+        </div>
+        <div class="sepedi-card" style="background:var(--white); border-radius:10px; padding:18px 24px; min-width:220px; box-shadow:0 2px 8px rgba(0,0,0,0.06); text-align:center; flex:1 1 220px; max-width:320px;">
+            <h4 style="color:var(--highlight); margin-bottom:8px;">📚 Sepedi Language</h4>
+            <p>Did you know? Sepedi is one of South Africa’s 11 official languages.<br>
+                Say <span style="color:var(--highlight); font-weight:600;">“Dumela!”</span> (Hello!) or <span style="color:var(--highlight); font-weight:600;">“Ke a leboga”</span> (Thank you!).</p>
+        </div>
+    </div>
+
+    <style>
+        /* Responsive & cute Sepedi section styles */
+        #sepediColors > div {
+            min-width: 0;
+        }
+        #colorLabel {
+            min-height: 22px;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+        .sepedi-story-box, .sepedi-wisdom-box {
+            animation: fadeIn 0.7s;
+        }
+        .sepedi-story-flex {
+            align-items: flex-start;
+        }
+        .sepedi-card {
+            transition: box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+        .sepedi-card:hover {
+            box-shadow: 0 6px 24px rgba(247,161,196,0.13), 0 2px 8px rgba(0,0,0,0.08);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .color-dot {
+            display: inline-block;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            margin: 0 2px 0 2px;
+            vertical-align: middle;
+            border: 1.5px solid #eee;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .emoji-bounce {
+            display: inline-block;
+            animation: bounce 1.2s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0);}
+            100% { transform: translateY(-8px);}
+        }
+        @media (max-width: 900px) {
+            .sepedi-story-flex {
+                flex-direction: column;
+                gap: 14px;
+                align-items: stretch;
+            }
+            .sepedi-card {
+                min-width: 160px !important;
+                max-width: 100% !important;
+            }
+            .sepedi-cards {
+                gap: 12px !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .sepedi-story-box, .sepedi-wisdom-box {
+                padding: 12px 6px !important;
+            }
+            .sepedi-story-flex img {
+                width: 90px !important;
+            }
+            .sepedi-cards {
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            .sepedi-card {
+                padding: 12px 8px !important;
+            }
+        }
+    </style>
+    <script>
+        // Color strip interactivity
+        const colorNames = [
+            "Red: Bravery &amp; strength",
+            "Blue: Peace &amp; calm",
+            "Green: Growth &amp; harmony",
+            "Yellow: Wealth &amp; joy",
+            "White: Purity &amp; hope"
+        ];
+        const colorLabel = document.getElementById('colorLabel');
+        const colorStrip = document.getElementById('sepediColors');
+        if (colorStrip) {
+            Array.from(colorStrip.children).forEach((div, idx) => {
+                div.addEventListener('mouseenter', () => {
+                    colorLabel.innerHTML = colorNames[idx];
+                });
+                div.addEventListener('mouseleave', () => {
+                    colorLabel.innerHTML = "";
+                });
+                div.addEventListener('click', () => {
+                    colorLabel.innerHTML = `<span style="font-weight:600;">${colorNames[idx]}</span> <span class="emoji-bounce">✨</span>`;
+                });
+            });
+            colorStrip.addEventListener('mouseleave', () => {
+                colorLabel.innerHTML = "";
+            });
+        }
+
+        // Cute card pop effect
+        document.querySelectorAll('.sepedi-card').forEach(card => {
+            card.addEventListener('mousedown', () => card.style.transform = 'scale(0.97)');
+            card.addEventListener('mouseup', () => card.style.transform = '');
+            card.addEventListener('mouseleave', () => card.style.transform = '');
+        });
+    </script>
+</section>
+
+<script>
+    // Extra Sepedi proverbs for interactivity
+    const sepediProverbs = [
+        "Kgomo ya moshate ga e na mmala — Royalty is not about appearance.",
+        "Lehlabile ga le hlabi le le tee — Success is a team effort.",
+        "Mabogo dinku a thebana — We help each other.",
+        "Pitsi e tswala ngwana o tshwana le yona — Like parent, like child.",
+        "Go aga ntlo go a hloka — Building a home takes effort.",
+        "Leleme le le botse le aga ntlo — Kind words build a home.",
+        "Tlhako ya tau ga e swanelwe ke meetse — Be fearless in pursuit of code.",
+        "Phiri ga e je ngwana wa yona — Nurture your skills like your own child."
+    ];
+
+    function showRandomProverb() {
+        const idx = Math.floor(Math.random() * sepediProverbs.length);
+        document.getElementById('proverbDisplay').innerText = sepediProverbs[idx];
+    }
+
+    // Optional: Animate Sepedi color strip on hover
+    const colorStripAnim = document.getElementById('sepediColors');
+    if (colorStripAnim) {
+        colorStripAnim.addEventListener('mouseenter', () => {
+            colorStripAnim.children[0].style.background = 'linear-gradient(90deg, #ff6666, #ff0000)';
+            colorStripAnim.children[1].style.background = 'linear-gradient(90deg, #66aaff, #0000ff)';
+            colorStripAnim.children[2].style.background = 'linear-gradient(90deg, #ed49cf, #00b96b)';
+            colorStripAnim.children[3].style.background = 'linear-gradient(90deg, #ffe066, #ffcc00)';
+            colorStripAnim.children[4].style.background = 'linear-gradient(90deg, #fceef1, #ffffff)';
+        });
+        colorStripAnim.addEventListener('mouseleave', () => {
+            colorStripAnim.children[0].style.background = 'linear-gradient(90deg, #ff0000, #ff6666)';
+            colorStripAnim.children[1].style.background = 'linear-gradient(90deg, #0000ff, #66aaff)';
+            colorStripAnim.children[2].style.background = 'linear-gradient(90deg, #00b96b, #ed49cf)';
+            colorStripAnim.children[3].style.background = 'linear-gradient(90deg, #ffcc00, #ffe066)';
+            colorStripAnim.children[4].style.background = 'linear-gradient(90deg, #ffffff, #fceef1)';
+        });
+    }
+</script>
+
+<script>
+  const sepediQuotes = [
+    "Tlhako ya tau ga e swanelwe ke meetse – Be fearless in pursuit of code.",
+    "Seboka ke maatla – Collaboration is strength, especially in tech.",
+    "Mošomo ga o fele – Keep learning, the tech world never stops.",
+    "Setlogolo ke ngwana wa kgale – Build with respect for the past.",
+    "Leleme le le botse le aga ntlo – Code with kindness and clarity.",
+    "Phiri ga e je ngwana wa yona – Nurture your skills like your own child."
+  ];
+
+  function showSepediQuote() {
+    const randomIndex = Math.floor(Math.random() * sepediQuotes.length);
+    document.getElementById('sepediResponse').innerText = sepediQuotes[randomIndex];
+  }
+</script>
+
+<section id="voluntary" data-aos="fade-up" style="margin-top:40px;">
+    <h2 style="text-align:center; color:var(--highlight); font-size:2em; margin-bottom:18px;">
+        🤝 Voluntary Work & Giving Back
+    </h2>
+    <div class="voluntary-cards" style="display:flex; flex-wrap:wrap; gap:24px; justify-content:center;">
+        <!-- Johannesburg Zoo -->
+        <div class="vol-card" style="background:var(--white); border-radius:14px; box-shadow:0 2px 12px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:340px; transition:transform 0.2s; position:relative;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <span style="font-size:1.7em;">🦁</span>
+                <h3 style="color:var(--highlight); font-size:1.18em; margin:0;">Johannesburg Zoo</h3>
+            </div>
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Zoo Animals" style="width:100%; border-radius:10px; margin-bottom:10px; object-fit:cover; height:140px;">
+            <p style="margin-bottom:10px;">I volunteered at the Johannesburg Zoo, helping with animal care and educational tours for kids. Loved sharing fun animal facts and seeing little faces light up!</p>
+            <button class="toggle-btn" style="background:var(--highlight); color:#fff; font-size:0.98em;" onclick="toggleVolDetails(0)">More Info</button>
+            <div class="vol-details" style="display:none; margin-top:10px; color:var(--highlight); font-size:0.98em;">
+                <strong>Highlight:</strong> Fed giraffes and led a “Wildlife Wonders” day for local schools!<br>
+                <span style="font-size:1.2em;">🦒🐒🦓</span>
+            </div>
+        </div>
+        <!-- Just Teddy -->
+        <div class="vol-card" style="background:var(--white); border-radius:14px; box-shadow:0 2px 12px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:340px; transition:transform 0.2s; position:relative;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <span style="font-size:1.7em;">🧁</span>
+                <h3 style="color:var(--highlight); font-size:1.18em; margin:0;">Just Teddy (Pastry Sous Chef)</h3>
+            </div>
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Pastries" style="width:100%; border-radius:10px; margin-bottom:10px; object-fit:cover; height:140px;">
+            <p style="margin-bottom:10px;">At Just Teddy, I volunteered as a pastry sous chef, helping craft delicious treats and learning the art of French patisserie. Sweetest experience ever!</p>
+            <button class="toggle-btn" style="background:var(--highlight); color:#fff; font-size:0.98em;" onclick="toggleVolDetails(1)">More Info</button>
+            <div class="vol-details" style="display:none; margin-top:10px; color:var(--highlight); font-size:0.98em;">
+                <strong>Highlight:</strong> Decorated cupcakes for charity events and learned to make perfect macarons!<br>
+                <span style="font-size:1.2em;">🍰🥐🍩</span>
+            </div>
+        </div>
+        <!-- SABC Sound Engineering School -->
+        <div class="vol-card" style="background:var(--white); border-radius:14px; box-shadow:0 2px 12px rgba(247,161,196,0.10); padding:22px 18px; min-width:220px; flex:1; max-width:340px; transition:transform 0.2s; position:relative;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <span style="font-size:1.7em;">🎧</span>
+                <h3 style="color:var(--highlight); font-size:1.18em; margin:0;">SABC Sound Engineering School</h3>
+            </div>
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" alt="Sound Equipment" style="width:100%; border-radius:10px; margin-bottom:10px; object-fit:cover; height:140px;">
+            <p style="margin-bottom:10px;">I assisted at SABC’s Sound Engineering School, handing out equipment and supporting students with their audio projects. Loved the creative buzz!</p>
+            <button class="toggle-btn" style="background:var(--highlight); color:#fff; font-size:0.98em;" onclick="toggleVolDetails(2)">More Info</button>
+            <div class="vol-details" style="display:none; margin-top:10px; color:var(--highlight); font-size:0.98em;">
+                <strong>Highlight:</strong> Helped set up microphones and mixers for live student showcases!<br>
+                <span style="font-size:1.2em;">🎤🎚️🎵</span>
+            </div>
+        </div>
+    </div>
+    <style>
+        .voluntary-cards {
+            margin-top: 10px;
+        }
+        .vol-card {
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+        .vol-card:hover {
+            box-shadow: 0 6px 24px rgba(247,161,196,0.18), 0 2px 8px rgba(0,0,0,0.08);
+            transform: translateY(-6px) scale(1.03);
+        }
+        .vol-details {
+            animation: fadeIn 0.4s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @media (max-width: 900px) {
+            .voluntary-cards {
+                flex-direction: column !important;
+                gap: 18px !important;
+            }
+            .vol-card {
+                max-width: 100% !important;
+                min-width: 180px !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .vol-card {
+                padding: 14px 6px !important;
+            }
+            .voluntary-cards {
+                gap: 12px !important;
+            }
+            .vol-card img {
+                height: 90px !important;
+            }
+        }
+    </style>
+    <script>
+        // Toggle voluntary details
+        function toggleVolDetails(idx) {
+            const cards = document.querySelectorAll('.vol-card .vol-details');
+            cards.forEach((el, i) => {
+                if (i === idx) {
+                    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+            // Emoji confetti for cuteness
+            const emojis = ['🦁','🧁','🎧','🦒','🍰','🎤','🐒','🥐','🎚️','🦓','🍩','🎵'];
+            for (let i = 0; i < 8; i++) {
+                const span = document.createElement('span');
+                span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+                span.style.position = 'fixed';
+                span.style.left = (window.innerWidth/2 + (Math.random()-0.5)*120) + 'px';
+                span.style.top = (window.scrollY + 200 + Math.random()*60) + 'px';
+                span.style.fontSize = (Math.random()*14+18) + 'px';
+                span.style.opacity = 0.85;
+                span.style.transition = 'top 1.1s cubic-bezier(.4,2,.6,1), opacity 1.1s';
+                document.body.appendChild(span);
+                setTimeout(() => {
+                    span.style.top = (window.scrollY + 100 + Math.random()*40) + 'px';
+                    span.style.opacity = 0;
+                }, 30);
+                setTimeout(() => { span.remove(); }, 1200);
+            }
+        }
+    </script>
+</section>
+<section id="contact" data-aos="fade-up" style="margin-top:40px;">
+    <h2 style="text-align:center; color:var(--highlight); font-size:2em; margin-bottom:18px;">
+        💌 Contact Me
+    </h2>
+    <div class="contact-flex" style="display:flex; flex-wrap:wrap; gap:32px; justify-content:center; align-items:flex-start;">
+        <!-- Contact Form -->
+        <form class="contact-form" id="contactForm" autocomplete="off" style="background:var(--white); border-radius:12px; box-shadow:0 2px 10px rgba(247,161,196,0.10); padding:28px 22px; min-width:260px; flex:1; max-width:380px;">
+            <div style="margin-bottom:12px; text-align:center;">
+                <span style="font-size:2em;">🌸</span>
+                <div style="font-size:1.1em; color:var(--highlight); margin-top:4px;">Let’s connect!</div>
+            </div>
+            <input type="text" id="name" placeholder="Your Name" required style="margin-bottom:10px;">
+            <input type="email" id="email" placeholder="Your Email" required style="margin-bottom:10px;">
+            <textarea rows="4" id="message" placeholder="Your Message" required style="margin-bottom:10px;"></textarea>
+            <button type="submit" style="width:100%; font-size:1.08em;">Send <span>✨</span></button>
+            <div id="formMsg" style="margin-top:10px; text-align:center; font-size:1em; color:var(--highlight); min-height:22px;"></div>
+        </form>
+        <!-- Socials -->
+        <div class="contact-socials" style="flex:1; min-width:200px; max-width:320px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div style="font-size:1.1em; color:var(--highlight); margin-bottom:10px;">Find me online:</div>
+            <div class="socials" style="display:flex; gap:18px; margin-bottom:10px;">
+                <a href="https://instagram.com/" target="_blank" aria-label="Instagram" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:katlego@email.com" aria-label="Email" class="social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/" target="_blank" aria-label="GitHub" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://tiktok.com/" target="_blank" aria-label="TikTok" class="social-link"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div style="margin-top:10px; color:var(--text); font-size:0.98em;">
+                <span style="background:var(--accent); color:var(--highlight); border-radius:6px; padding:4px 10px;">
+                    I reply with good vibes!
+                </span>
+            </div>
+        </div>
+    </div>
+    <style>
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin: 0 0 8px 0;
+            border-radius: 6px;
+            border: 1.5px solid #ffd6e0;
+            font-size: 1em;
+            background: #fff;
+            color: var(--text);
+            transition: border 0.2s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border: 1.5px solid var(--highlight);
+            outline: none;
+            background: #fff7fa;
+        }
+        .contact-form button {
+            background: var(--highlight);
+            border: none;
+            color: #fff;
+            padding: 10px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 2px 8px rgba(247,161,196,0.08);
+        }
+        .contact-form button:hover {
+            background: var(--accent);
+            color: var(--highlight);
+            transform: scale(1.04);
+        }
+        .socials .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--highlight);
+            font-size: 1.7em;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+            box-shadow: 0 2px 8px rgba(247,161,196,0.08);
+            text-decoration: none;
+            position: relative;
+        }
+        .socials .social-link:hover {
+            background: var(--highlight);
+            color: #fff;
+            transform: scale(1.13) rotate(-6deg);
+            box-shadow: 0 4px 18px rgba(247,161,196,0.18);
+        }
+        @media (max-width: 900px) {
+            .contact-flex {
+                flex-direction: column;
+                gap: 18px !important;
+                align-items: stretch;
+            }
+            .contact-form, .contact-socials {
+                max-width: 100% !important;
+                min-width: 0 !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .contact-form {
+                padding: 14px 6px !important;
+            }
+            .contact-socials {
+                padding: 0 2px !important;
+            }
+            .socials .social-link {
+                width: 38px !important;
+                height: 38px !important;
+                font-size: 1.3em !important;
+            }
+        }
+    </style>
+    <script>
+        // Cute form validation & feedback
+        const contactForm = document.getElementById('contactForm');
+        const formMsg = document.getElementById('formMsg');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formMsg.style.color = 'var(--highlight)';
+            formMsg.innerHTML = '🌸 Sending...';
+            setTimeout(() => {
+                // Simulate success
+                formMsg.style.color = 'var(--highlight)';
+                formMsg.innerHTML = 'Thank you for reaching out! <span style="font-size:1.2em;">💖</span> I’ll reply soon!';
+                contactForm.reset();
+            }, 1200);
+        });
+        // Animate socials on hover (emoji confetti)
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                const emojis = ['🌸','✨','💖','🎉','🧁','🚀','🎨','🎶'];
+                const span = document.createElement('span');
+                span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+                span.style.position = 'absolute';
+                span.style.top = '-18px';
+                span.style.right = '-8px';
+                span.style.fontSize = '1.2em';
+                span.style.opacity = 0.9;
+                link.appendChild(span);
+                setTimeout(() => { span.remove(); }, 900);
+            });
+        });
+    </script>
+</section>
+
+<footer style="background:var(--accent); padding:32px 12px; text-align:center; position:relative; z-index:10;">
+    <div style="max-width:900px; margin:auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px;">
+        <div style="flex:1; min-width:180px; text-align:left;">
+            <span style="font-size:1.5em; color:var(--highlight); font-weight:700;">Katlego 🌸</span>
+            <div id="footerQuote" style="margin-top:8px; color:var(--highlight); font-size:1em; font-style:italic;"></div>
+        </div>
+        <div style="flex:1; min-width:180px; text-align:center;">
+            <p id="countdown" style="font-size:1.08em; color:var(--highlight); margin:0 0 6px 0;"></p>
+            <span style="background:var(--highlight); color:#fff; border-radius:6px; padding:4px 10px; font-size:0.98em;">
+                © 2025 Katlego | Made with <span class="emoji-bounce">💖</span> + Code
+            </span>
+        </div>
+        <div style="flex:1; min-width:180px; text-align:right;">
+            <div style="display:inline-flex; gap:12px;">
+                <a href="https://instagram.com/" target="_blank" aria-label="Instagram" class="footer-social" style="color:var(--highlight);"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:katlego@email.com" aria-label="Email" class="footer-social" style="color:var(--highlight);"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/" target="_blank" aria-label="GitHub" class="footer-social" style="color:var(--highlight);"><i class="fab fa-github"></i></a>
+                <a href="https://tiktok.com/" target="_blank" aria-label="TikTok" class="footer-social" style="color:var(--highlight);"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+    <button id="footerQuoteBtn" class="toggle-btn" style="margin-top:18px; background:var(--highlight); color:#fff; font-size:1em; border-radius:8px; padding:7px 18px; font-weight:600; cursor:pointer;">
+        ✨ Random Cute Quote
+    </button>
+    <style>
+        .footer-social {
+            font-size: 1.5em;
+            background: var(--white);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+            box-shadow: 0 2px 8px rgba(247,161,196,0.08);
+            text-decoration: none;
+            position: relative;
+        }
+        .footer-social:hover {
+            background: var(--highlight);
+            color: #fff !important;
+            transform: scale(1.13) rotate(-6deg);
+            box-shadow: 0 4px 18px rgba(247,161,196,0.18);
+        }
+        @media (max-width: 900px) {
+            footer > div {
+                flex-direction: column !important;
+                gap: 10px !important;
+                text-align: center !important;
+            }
+            footer > div > div {
+                text-align: center !important;
+            }
+        }
+        @media (max-width: 600px) {
+            footer {
+                padding: 18px 4px !important;
+            }
+            .footer-social {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 1.1em !important;
+            }
+            #footerQuoteBtn {
+                padding: 6px 10px !important;
+                font-size: 0.98em !important;
+            }
+        }
+        .emoji-bounce {
+            display: inline-block;
+            animation: bounce 1.2s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0);}
+            100% { transform: translateY(-7px);}
+        }
+    </style>
+    <script>
+        // Cute random footer quotes
+        const footerQuotes = [
+            "Keep glowing, keep growing! 🌸",
+            "Code with heart, dream with courage.",
+            "You’re magic — don’t forget it! ✨",
+            "Girls who code, change the world.",
+            "Every bug is a step to brilliance.",
+            "Pink power, tech power! 💖",
+            "Rise, code, repeat. 🚀",
+            "Your vibe attracts your tribe.",
+            "Celebrate every small win! 🎉"
+        ];
+        function showFooterQuote() {
+            const idx = Math.floor(Math.random() * footerQuotes.length);
+            document.getElementById('footerQuote').innerText = footerQuotes[idx];
+        }
+        document.getElementById('footerQuoteBtn').onclick = function() {
+            showFooterQuote();
+            // Emoji confetti
+            const emojis = ['🌸','✨','💖','🎉','🧁','🚀','🎨','🎶'];
+            for (let i = 0; i < 10; i++) {
+                const span = document.createElement('span');
+                span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+                span.style.position = 'fixed';
+                span.style.left = (window.innerWidth/2 + (Math.random()-0.5)*120) + 'px';
+                span.style.top = (window.innerHeight-60) + 'px';
+                span.style.fontSize = (Math.random()*14+18) + 'px';
+                span.style.opacity = 0.85;
+                span.style.transition = 'top 1.1s cubic-bezier(.4,2,.6,1), opacity 1.1s';
+                document.body.appendChild(span);
+                setTimeout(() => {
+                    span.style.top = (window.innerHeight-160-Math.random()*80) + 'px';
+                    span.style.opacity = 0;
+                }, 30);
+                setTimeout(() => { span.remove(); }, 1200);
+            }
+        };
+        // Show a quote on load
+        showFooterQuote();
+    </script>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+
+<script>
+  // Particle BG
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let particles = [];
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2 + 1;
+      this.speedX = Math.random() * 0.5 - 0.25;
+      this.speedY = Math.random() * 0.5 - 0.25;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+      if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+    }
+    draw() {
+      ctx.fillStyle = 'rgba(255, 182, 193, 0.6)';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  function init() {
+    particles = [];
+    for (let i = 0; i < 120; i++) particles.push(new Particle());
+  }
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+  });
+  init();
+  animate();
+
+  // Typing Effect
+  const phrases = ["Techie", "Creator", "Glow Queen", "Data Analyst"];
+  let i = 0, j = 0, isDeleting = false, current = [], display = document.getElementById("type");
+  function loop() {
+    display.innerHTML = current.join("");
+    if (!isDeleting && j <= phrases[i].length) current.push(phrases[i][j++]);
+    else if (isDeleting && j > 0) current.pop(), j--;
+    if (j === phrases[i].length) isDeleting = true;
+    if (j === 0 && isDeleting) isDeleting = false, i = (i+1)%phrases.length;
+    setTimeout(loop, isDeleting ? 60 : 120);
+  }
+  loop();
+
+  // Toggle Extras
+  function toggleExtras() {
+    const box = document.getElementById('extrasBox');
+    box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  // Theme toggle
+  function toggleTheme() {
+    document.body.classList.toggle("dark");
+  }
+
+  // Countdown
+  const gradDate = new Date("2025-11-30").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = gradDate - now;
+    const days = Math.floor(diff / (1000*60*60*24));
+    document.getElementById("countdown").innerText = `🎓 ${days} days till graduation!`;
+  }, 1000);
+</script>
+</body>
+</html>
